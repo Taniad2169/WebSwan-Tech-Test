@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
   <meta
     name="robots"
@@ -11,14 +15,14 @@
 
   <meta name="theme-color" content="#3da7f2">
 
-  <title>Private WebSwan Workspace</title>
+  <title>WebSwan Private Workspace</title>
 
   <style>
     :root {
       color-scheme: light;
       --blue: #3da7f2;
       --blue-dark: #2679c9;
-      --ink: #10283d;
+      --navy: #10283d;
       --white: #ffffff;
     }
 
@@ -43,7 +47,7 @@
       background:
         radial-gradient(
           circle at 15% 15%,
-          rgba(255, 255, 255, 0.24),
+          rgba(255, 255, 255, 0.25),
           transparent 28%
         ),
         linear-gradient(
@@ -56,26 +60,30 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    main {
-      width: min(620px, 100%);
-      padding: clamp(28px, 6vw, 52px);
-
-      border: 1px solid rgba(255, 255, 255, 0.38);
-      border-radius: 24px;
-
-      background: rgba(255, 255, 255, 0.13);
-
-      box-shadow:
-        0 24px 70px rgba(10, 59, 103, 0.25);
-
-      text-align: center;
-      backdrop-filter: blur(10px);
+    button {
+      font: inherit;
     }
 
-    .mark {
+    .owner-card {
+      width: min(620px, 100%);
+      padding: clamp(30px, 6vw, 54px);
+
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 24px;
+
+      background: rgba(255, 255, 255, 0.14);
+
+      box-shadow:
+        0 24px 70px rgba(10, 59, 103, 0.28);
+
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand-mark {
       display: grid;
-      width: 68px;
-      height: 68px;
+      width: 70px;
+      height: 70px;
       margin: 0 auto 22px;
       place-items: center;
 
@@ -89,7 +97,7 @@
     .eyebrow {
       margin: 0 0 12px;
 
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -103,7 +111,7 @@
       letter-spacing: -0.035em;
     }
 
-    p {
+    .description {
       max-width: 470px;
       margin: 20px auto 0;
 
@@ -113,40 +121,378 @@
       line-height: 1.7;
     }
 
-    .notice {
-      margin-top: 28px;
-      padding: 14px 16px;
+    .key-button,
+    .bulb-button {
+      display: grid;
+      place-items: center;
 
-      border-radius: 12px;
+      border: 2px solid var(--white);
+      border-radius: 50%;
 
       background: var(--white);
-      color: var(--ink);
+      color: var(--navy);
 
-      font-size: 0.88rem;
+      cursor: pointer;
+      user-select: none;
+
+      box-shadow:
+        0 14px 32px rgba(10, 59, 103, 0.28);
+
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease;
+    }
+
+    .key-button {
+      width: 84px;
+      height: 84px;
+      margin: 30px auto 0;
+
+      font-size: 36px;
+    }
+
+    .bulb-button {
+      width: 104px;
+      height: 104px;
+      margin: 24px auto 12px;
+
+      font-size: 44px;
+    }
+
+    .key-button:hover,
+    .bulb-button:hover {
+      transform: translateY(-2px) scale(1.03);
+
+      box-shadow:
+        0 18px 38px rgba(10, 59, 103, 0.34);
+    }
+
+    .key-button:active,
+    .bulb-button:active {
+      transform: scale(0.93);
+    }
+
+    .key-button:focus-visible,
+    .bulb-button:focus-visible,
+    .close-modal:focus-visible {
+      outline: 4px solid var(--navy);
+      outline-offset: 4px;
+    }
+
+    .locked-message {
+      margin-top: 15px;
+
+      color: rgba(255, 255, 255, 0.82);
+
+      font-size: 0.84rem;
       font-weight: 700;
-      line-height: 1.5;
+    }
+
+    dialog {
+      width: min(460px, calc(100% - 30px));
+      padding: 0;
+
+      border: 0;
+      border-radius: 22px;
+
+      background: var(--white);
+      color: var(--navy);
+
+      box-shadow:
+        0 30px 90px rgba(2, 28, 51, 0.48);
+    }
+
+    dialog::backdrop {
+      background: rgba(4, 25, 44, 0.78);
+      backdrop-filter: blur(7px);
+    }
+
+    .modal-content {
+      position: relative;
+      padding: 42px 30px 32px;
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      margin: 0;
+
+      font-size: clamp(1.7rem, 5vw, 2.35rem);
+      line-height: 1.1;
+    }
+
+    .modal-content p {
+      margin: 14px auto 0;
+
+      color: #5f7180;
+
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 13px;
+      right: 13px;
+
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+
+      border: 0;
+      border-radius: 50%;
+
+      background: #eaf3fa;
+      color: var(--navy);
+
+      font-size: 1.35rem;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+    .modal-status {
+      min-height: 22px;
+      margin-top: 12px;
+
+      color: var(--blue-dark);
+
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .opening-message {
+      display: none;
+      margin-top: 12px;
+
+      color: #087b8f;
+
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .opening-message.show {
+      display: block;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 15px;
+      }
+
+      .owner-card {
+        padding: 32px 22px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <main>
-    <div class="mark" aria-hidden="true">W</div>
+  <main class="owner-card">
+    <div class="brand-mark" aria-hidden="true">
+      W
+    </div>
 
-    <p class="eyebrow">The WebSwan</p>
-
-    <h1>Private business workspace</h1>
-
-    <p>
-      This internal WebSwan tool is not available through the public
-      website. Authorized reports are provided directly during scheduled
-      client consultations.
+    <p class="eyebrow">
+      The WebSwan
     </p>
 
-    <div class="notice">
-      No audit controls, private files, client reports, or sign-in links
-      are available on this page.
-    </div>
+    <h1>
+      Private workspace
+    </h1>
+
+    <p class="description">
+      Internal WebSwan technical auditing and client-report workspace.
+    </p>
+
+    <button
+      id="keyButton"
+      class="key-button"
+      type="button"
+      aria-label="Private owner key"
+    >
+      🗝️
+    </button>
+
+    <p class="locked-message">
+      Owner access locked
+    </p>
   </main>
+
+  <dialog
+    id="ownerModal"
+    aria-labelledby="modalTitle"
+  >
+    <div class="modal-content">
+      <button
+        id="closeModal"
+        class="close-modal"
+        type="button"
+        aria-label="Close owner verification"
+      >
+        ×
+      </button>
+
+      <h2 id="modalTitle">
+        Owner verification
+      </h2>
+
+      <p>
+        Complete the private verification sequence to continue.
+      </p>
+
+      <button
+        id="bulbButton"
+        class="bulb-button"
+        type="button"
+        aria-label="Private owner light"
+      >
+        💡
+      </button>
+
+      <div
+        id="modalStatus"
+        class="modal-status"
+        aria-live="polite"
+      >
+        Verification required
+      </div>
+
+      <div
+        id="openingMessage"
+        class="opening-message"
+        role="status"
+      >
+        Opening your protected workspace…
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const PRIVATE_AUDIT_URL =
+        "https://webswan-technical-audit-lab.thewebswann.chatgpt.site/";
+
+      const keyButton =
+        document.getElementById("keyButton");
+
+      const bulbButton =
+        document.getElementById("bulbButton");
+
+      const ownerModal =
+        document.getElementById("ownerModal");
+
+      const closeModal =
+        document.getElementById("closeModal");
+
+      const modalStatus =
+        document.getElementById("modalStatus");
+
+      const openingMessage =
+        document.getElementById("openingMessage");
+
+      let keyClicks = 0;
+      let bulbClicks = 0;
+
+      let keyTimer;
+      let bulbTimer;
+
+      let opening = false;
+
+      function resetKey() {
+        keyClicks = 0;
+        window.clearTimeout(keyTimer);
+      }
+
+      function resetBulb() {
+        bulbClicks = 0;
+        opening = false;
+
+        window.clearTimeout(bulbTimer);
+
+        modalStatus.textContent =
+          "Verification required";
+
+        openingMessage.classList.remove("show");
+      }
+
+      keyButton.addEventListener(
+        "click",
+        function () {
+          keyClicks += 1;
+
+          window.clearTimeout(keyTimer);
+
+          keyTimer = window.setTimeout(
+            resetKey,
+            5000
+          );
+
+          if (keyClicks >= 7) {
+            resetKey();
+            resetBulb();
+
+            ownerModal.showModal();
+            bulbButton.focus();
+          }
+        }
+      );
+
+      bulbButton.addEventListener(
+        "click",
+        function () {
+          if (opening) {
+            return;
+          }
+
+          bulbClicks += 1;
+
+          window.clearTimeout(bulbTimer);
+
+          bulbTimer = window.setTimeout(
+            resetBulb,
+            5000
+          );
+
+          if (bulbClicks >= 3) {
+            opening = true;
+
+            window.clearTimeout(bulbTimer);
+
+            modalStatus.textContent =
+              "Owner sequence accepted";
+
+            openingMessage.classList.add("show");
+
+            window.setTimeout(
+              function () {
+                window.location.assign(
+                  PRIVATE_AUDIT_URL
+                );
+              },
+              700
+            );
+          }
+        }
+      );
+
+      closeModal.addEventListener(
+        "click",
+        function () {
+          resetBulb();
+          ownerModal.close();
+        }
+      );
+
+      ownerModal.addEventListener(
+        "cancel",
+        function () {
+          resetBulb();
+        }
+      );
+    })();
+  </script>
 </body>
 </html>
