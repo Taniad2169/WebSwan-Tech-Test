@@ -1,22 +1,22 @@
 <!-- WebSwan Technical Audit Lab -->
 <section id="webswan-audit-embed" aria-label="WebSwan Technical Audit Lab">
   <style>
-    #webswan-audit-embed {
-      width: 100%;
-      margin: 0;
-      padding: 18px;
-      box-sizing: border-box;
-      border-radius: 20px;
-      background: #3da7f2;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
     #webswan-audit-embed,
     #webswan-audit-embed * {
       box-sizing: border-box;
     }
 
-    #webswan-audit-embed .webswan-audit-frame-shell {
+    #webswan-audit-embed {
+      width: 100%;
+      margin: 0;
+      padding: 12px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #3da7f2;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #webswan-audit-embed .audit-frame-shell {
       width: 100%;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.45);
@@ -25,26 +25,26 @@
       box-shadow: 0 18px 45px rgba(12, 57, 105, 0.22);
     }
 
-    #webswan-audit-embed .webswan-audit-frame {
+    #webswan-audit-embed .audit-frame {
       display: block;
       width: 100%;
-      min-height: 1500px;
+      min-height: 1400px;
       border: 0;
       background: #ffffff;
     }
 
-    #webswan-audit-embed .webswan-audit-fallback {
-      margin: 14px 0 0;
-      padding: 14px 16px;
+    #webswan-audit-embed .audit-fallback {
+      margin: 12px 0 0;
+      padding: 14px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.96);
+      background: #ffffff;
       color: #173b61;
       text-align: center;
       font-size: 14px;
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
-    #webswan-audit-embed .webswan-audit-link {
+    #webswan-audit-embed .audit-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -52,42 +52,38 @@
       margin-top: 10px;
       padding: 10px 18px;
       border-radius: 10px;
-      background: #3da7f2;
+      background: #2679c9;
       color: #ffffff;
       font-weight: 700;
       text-decoration: none;
-      transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
     }
 
-    #webswan-audit-embed .webswan-audit-link:hover,
-    #webswan-audit-embed .webswan-audit-link:focus {
-      background: #2679c9;
+    #webswan-audit-embed .audit-link:hover,
+    #webswan-audit-embed .audit-link:focus {
+      background: #173b61;
       color: #ffffff;
-      transform: translateY(-1px);
     }
 
-    #webswan-audit-embed .webswan-audit-link:focus-visible {
-      outline: 3px solid #173b61;
+    #webswan-audit-embed .audit-link:focus-visible {
+      outline: 3px solid #ffffff;
       outline-offset: 3px;
     }
 
     @media (max-width: 768px) {
       #webswan-audit-embed {
-        padding: 8px;
+        padding: 7px;
         border-radius: 14px;
       }
 
-      #webswan-audit-embed .webswan-audit-frame {
-        min-height: 1800px;
+      #webswan-audit-embed .audit-frame {
+        min-height: 1700px;
       }
     }
   </style>
 
-  <div class="webswan-audit-frame-shell">
+  <div class="audit-frame-shell">
     <iframe
-      class="webswan-audit-frame"
+      class="audit-frame"
       src="https://webswan-technical-audit-lab.thewebswann.chatgpt.site/"
       title="WebSwan Technical Audit Lab"
       loading="eager"
@@ -96,12 +92,11 @@
     ></iframe>
   </div>
 
-  <div class="webswan-audit-fallback">
-    If the audit workspace does not appear above, open it securely in a new browser tab.
-    <br />
-
+  <div class="audit-fallback">
+    If the Audit Lab does not appear, open it in a separate browser tab.
+    <br>
     <a
-      class="webswan-audit-link"
+      class="audit-link"
       href="https://webswan-technical-audit-lab.thewebswann.chatgpt.site/"
       target="_blank"
       rel="noopener noreferrer"
